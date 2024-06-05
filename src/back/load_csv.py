@@ -17,5 +17,4 @@ def csv_value():
     # Related Non-Motorist         -> 166642
     # Non-Motorist Substance Abuse -> 167788
     # Circumstance                 -> 140746
-
     return df
