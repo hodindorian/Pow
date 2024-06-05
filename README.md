@@ -11,6 +11,8 @@
 
 Projet de data mining, qui permet d'ouvrir un CSV, de pré-traiter et nettoyer les données, de les visualiser pour ensuite essayer de prédire et ajouter les données manquantes.
 
+Dataset : https://catalog.data.gov/dataset/crash-reporting-drivers-data
+
 
 # Développeurs 🧑‍💻
 
