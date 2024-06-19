@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy  as np
+import matplotlib.pyplot as plt
 
 def return_csv(path):
     df = pd.read_csv(path)
@@ -27,9 +28,9 @@ def csv_norm_min_max(df,col):
     df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
     return df
 
-def csv_stadadisation_Z(df,col):
+def csv_stadardisation_Z(df,col):
     mean_col1 = df[col].mean()
     std_col1 = df[col].std()
     df[col] = (df[col] - mean_col1) / std_col1
     return df[col]
-    
+
