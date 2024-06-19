@@ -14,8 +14,10 @@ l.csv_value(df)
 
 # l.csv_standardisation_Z(df,"Vehicle Year")
 
+# l.csv_robust_normalize(df,"Speed Limit")
+
 # s.histo_col(df,"Speed Limit")
 
 # s.plotBoxWhisker(df)
 
-c.launch_cluster(df,['Speed Limit','Vehicle Year'])
+# c.launch_cluster(df,['Speed Limit','Vehicle Year'])

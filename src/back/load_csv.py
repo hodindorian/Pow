@@ -34,3 +34,15 @@ def csv_standardisation_Z(df,col):
     df[col] = (df[col] - mean_col1) / std_col1
     return df[col]
 
+def csv_robust_normalize(df, column):
+    # Calcul de la médiane et de l'IQR
+    median = df[column].median()
+    q1 = df[column].quantile(0.25)
+    q3 = df[column].quantile(0.75)
+    iqr = q3 - q1
+
+    # Application de la normalisation robuste
+    normalized_column = (df[column] - median) / iqr
+    df[column] = normalized_column
+    print (normalized_column)
+    return normalized_column
