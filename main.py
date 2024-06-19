@@ -20,4 +20,4 @@ l.csv_value(df)
 
 # s.plotBoxWhisker(df)
 
-# c.launch_cluster(df,['Speed Limit','Vehicle Year'])
+c.launch_cluster(df,['Speed Limit','Vehicle Year'])

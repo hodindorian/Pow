@@ -70,7 +70,7 @@ def launch_cluster(df,array_columns):
     # Appliquer DBSCAN
     dbscan = DBSCAN(eps=0.2, min_samples=5)
     labels_dbscan = dbscan.fit_predict(X)
-    # stats_dbscan = calculate_cluster_statistics_dbscan(X, labels_dbscan)
+    stats_dbscan = calculate_cluster_statistics_dbscan(X, labels_dbscan)
         # for stat in stats_dbscan:
         #     print(f"Cluster {stat['cluster']}: {stat['num_points']} points, Density: {stat['density']}")
     if len(array_columns) == 3:
@@ -79,4 +79,5 @@ def launch_cluster(df,array_columns):
     else: 
         visualize_clusters_2d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering")
         visualize_clusters_2d(X, labels_dbscan, title="DBSCAN Clustering")
+    return stats_kmeans,stats_dbscan
     
