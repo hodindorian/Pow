@@ -28,7 +28,7 @@ def csv_norm_min_max(df,col):
     df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
     return df
 
-def csv_stadardisation_Z(df,col):
+def csv_standardisation_Z(df,col):
     mean_col1 = df[col].mean()
     std_col1 = df[col].std()
     df[col] = (df[col] - mean_col1) / std_col1
