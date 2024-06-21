@@ -56,6 +56,35 @@ def calculate_cluster_statistics_dbscan(X, labels):
         })
     return stats
 
+def launch_cluster_knn(df,array_columns,n):
+    X = df[array_columns].values
+    
+    kmeans = KMeans(n_clusters=n, random_state=42)
+    labels_kmeans = kmeans.fit_predict(X)
+    centers_kmeans = kmeans.cluster_centers_
+    # for stat in stats_kmeans:
+    #     print(f"Cluster {stat['cluster']}: {stat['num_points']} points, Center: {stat['center']}")
+
+    stats_kmeans = calculate_cluster_statistics_kmeans(X, labels_kmeans, centers_kmeans)
+    if len(array_columns) == 3:
+        visualize_clusters_3d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering 3D")
+    else:
+        visualize_clusters_2d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering")
+    return stats_kmeans
+
+def launch_cluster_DBSCAN(df, array_columns):
+    X = df[array_columns].values
+    dbscan = DBSCAN(eps=0.2, min_samples=5)
+    labels_dbscan = dbscan.fit_predict(X)
+    stats_dbscan = calculate_cluster_statistics_dbscan(X, labels_dbscan)
+    # for stat in stats_dbscan:
+    #     print(f"Cluster {stat['cluster']}: {stat['num_points']} points, Density: {stat['density']}")
+    if len(array_columns) == 3:
+        visualize_clusters_3d(X, labels_dbscan, title="DBSCAN Clustering 3D")
+    else:
+        visualize_clusters_2d(X, labels_dbscan, title="DBSCAN Clustering")
+    return stats_dbscan
+
 def launch_cluster(df,array_columns):
     X = df[array_columns].values
     
@@ -76,7 +105,7 @@ def launch_cluster(df,array_columns):
     if len(array_columns) == 3:
         visualize_clusters_3d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering 3D")
         visualize_clusters_3d(X, labels_dbscan, title="DBSCAN Clustering 3D")
-    else: 
+    else:
         visualize_clusters_2d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering")
         visualize_clusters_2d(X, labels_dbscan, title="DBSCAN Clustering")
     return stats_kmeans,stats_dbscan
