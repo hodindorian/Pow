@@ -33,14 +33,23 @@ def impute_with_knn(data, n_neighbors=5):
     return pd.DataFrame(imputer.fit_transform(data), columns=data.columns)
 
 def impute_with_regression(data):
-    for column in data.columns:
-        if data[column].isnull().sum() > 0:
-            train_data = data[data[column].notna()]
-            test_data = data[data[column].isna()]
-            if not train_data.empty and not test_data.empty:
-                regressor = LinearRegression()
-                regressor.fit(train_data.drop(column, axis=1), train_data[column])
-                data.loc[data[column].isna(), column] = regressor.predict(test_data.drop(column, axis=1))
+    missing_columns = data.columns[data.isnull().any()].tolist()
+    
+    for col in missing_columns:
+        missing_data = data[data[col].isnull()]
+        complete_data = data[~data[col].isnull()]
+        if missing_data.empty or complete_data.empty:
+            continue
+        X_complete = complete_data.drop(columns=missing_columns)
+        y_complete = complete_data[col]
+        X_missing = missing_data.drop(columns=missing_columns)
+        if X_missing.shape[0] > 0.5 * data.shape[0]:
+            continue
+        model = LinearRegression()
+        model.fit(X_complete, y_complete)
+        y_pred = model.predict(X_missing)
+        data.loc[df[col].isnull(), col] = y_pred
+        
     return data
 
 
@@ -64,4 +73,3 @@ def handle_missing_values(data, method, n_neighbors=5):
         return impute_with_regression(data)
     else:
         raise ValueError("Unknown method")
-
