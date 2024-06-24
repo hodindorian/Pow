@@ -24,7 +24,7 @@ def visualize_clusters_3d(X, labels, centers=None, title="Clusters"):
     ax.set_xlabel("Feature 1")
     ax.set_ylabel("Feature 2")
     ax.set_zlabel("Feature 3")
-    plt.show()
+    return plt.gcf()
 
 def calculate_cluster_statistics_kmeans(X, labels, centers):
     unique_labels = np.unique(labels)
