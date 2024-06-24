@@ -23,7 +23,6 @@ def nav_bar():
     st.page_link("pages/clean.py", label="Clean", icon="🧼", help=None)
     st.page_link("pages/visualize.py", label="Visualize", icon="👁️", help=None)
     st.page_link("pages/prediction.py", label="Predict", icon="🔮", help=None)
-    st.page_link("pages/evaluate.py", label="Evaluate", icon=None, help=None)
 
 def clean_dataframe(line):
     # Call to function to clean data
