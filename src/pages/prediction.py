@@ -30,18 +30,22 @@ if 'df' in st.session_state:
     with tab1:
         st.header("Clustering")
         selected_columns = handle_column_multiselect(df, "clustering")
-            
+
+        if len(selected_columns) >= 3:
+            dimensions = st.radio("Reduce to dimensions X with PCA:",[2,3],index=0)
+        else:
+            dimensions = 2
         
         tab_names = ["K-means", "DBSCAN"] 
         tab11, tab12 = st.tabs(tab_names)
 
         with tab11:
             if st.button(f"Start {tab_names[0]}"):
-                st.pyplot(cc.launch_cluster_knn(df, selected_columns))
+                st.pyplot(cc.launch_cluster_knn(df, selected_columns, dimensions=dimensions))
 
         with tab12:
             if st.button(f"Start {tab_names[1]}"):
-                st.pyplot(cc.launch_cluster_dbscan(df, selected_columns))
+                st.pyplot(cc.launch_cluster_dbscan(df, selected_columns, dimensions))
 
     with tab2:
         st.header("Predictions")
