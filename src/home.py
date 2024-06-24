@@ -1,5 +1,6 @@
 import streamlit as st
 from io import StringIO
+from ydata_profiling import ProfileReport
 import pandas as pd
 
 def  statistics(df):
@@ -42,6 +43,9 @@ def main():
 
         st.write("## Statistics")
         statistics(df)
+
+        profile = ProfileReport(df, title='Pandas Profiling Report', explorative=True)
+        profile.to_widgets()
 
         if st.button("Next"):
             st.switch_page("pages/clean.py")
