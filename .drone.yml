@@ -1,0 +1,31 @@
+kind: pipeline
+type: docker
+name: Pow
+
+trigger:
+  event:
+    - push
+
+steps:
+
+  - name: build-pow
+    image: plugins/docker
+    settings:
+      dockerfile: ./src/Dockerfile
+      context: ./src
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/dorian.hodin/pow
+      username:
+        from_secret: SECRET_USERNAME
+      password:
+        from_secret: SECRET_PASSWD
+
+  - name: deploy-pow
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+      IMAGENAME: hub.codefirst.iut.uca.fr/dorian.hodin/pow:latest
+      CONTAINERNAME: pow
+      COMMAND: create
+      OVERWRITE: true
+      ADMINS: dorianhodin,aurianjault,remiarnal
+    depends_on: [ build-pow ]

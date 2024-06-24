@@ -2,6 +2,7 @@ import pandas as pd
 import numpy  as np
 import matplotlib.pyplot as plt
 
+<<<<<<< HEAD
 def return_csv(path):
     df = pd.read_csv(path)
     return df
@@ -12,7 +13,6 @@ def csv_value(df):
     # Print number of missing value for each column
     print(df.isna().sum())
     # Useless values
-
 
 def csv_check(df):
     for col in df:
