@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 RUN pip install --upgrade pip
-RUN pip install streamlit matplotlib pandas scikit-learn
+RUN pip install streamlit matplotlib pandas scikit-learn ydata-profiling
 
 EXPOSE 8080
 
