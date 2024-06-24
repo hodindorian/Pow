@@ -31,12 +31,6 @@ def clean_dataframe(line):
     line.write("Dataframe has been cleaned")
 
 def main():
-    url = get_url()
-    if url:
-        current_url = f"https://{url}{st.experimental_get_query_params().get('', [''])[0]}"
-        if not current_url.endswith('/'):
-            st.experimental_set_query_params(**{'': current_url + '/'})
-            st.experimental_rerun()
     nav_bar()
     st.write("# Pow: Your data analyser")
 
