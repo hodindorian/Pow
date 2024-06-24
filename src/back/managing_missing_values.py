@@ -60,8 +60,6 @@ def impute_with_regression(data):
     - n_neighbors: Number of neighbors to use for KNN imputation (only used if method='knn')
 """
 def handle_missing_values(data, method, n_neighbors=5):
-
-    data = drop_high_null_percentage(data)
     data = convert_categorical_to_numeric(data)    
     if method == 'mean':
         return replace_with_mean(data)
