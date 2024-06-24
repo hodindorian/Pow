@@ -37,15 +37,15 @@ def main():
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
-        st.session_state.orig_df = df
+        st.session_state.original_df = df
         st.write("## Dataframe (10 first/last lines)")
         display_df_first_and_lasts_lines(df)
 
         st.write("## Statistics")
         statistics(df)
 
-        profile = ProfileReport(df, title='Pandas Profiling Report', explorative=True)
-        profile.to_widgets()
+        # profile = ProfileReport(df, title='Pandas Profiling Report', explorative=True)
+        # profile.to_widgets()
 
         if st.button("Next"):
             st.switch_page("pages/clean.py")
