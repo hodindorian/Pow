@@ -2,7 +2,6 @@ import pandas as pd
 import numpy  as np
 import matplotlib.pyplot as plt
 
-<<<<<<< HEAD
 def return_csv(path):
     df = pd.read_csv(path)
     return df
