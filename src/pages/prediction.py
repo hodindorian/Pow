@@ -6,8 +6,18 @@ sys.path.append('./back/')
 import clustering_csv as cc
 import prediction as p
 
-if 'df' in st.session_state:
+def display_prediction_results(df, targetCol):
+    df_cols.remove(col)
+    original_col = df[col]
+    predicted_col = p.getColumnsForPredictionAndPredict(df, df_cols, "Route Type", "Linear Regression")    
+    
+    new_df = pd.DataFrame()
+    new_df['Original'] = original_col
+    new_df['Predicted'] = predicted_col
 
+    st.dataframe(new_df)    
+
+if 'df' in st.session_state:
     df = st.session_state.df
     df_cols = df.columns.tolist()
 
@@ -21,21 +31,10 @@ if 'df' in st.session_state:
 
     if st.button("Linear Regression"):
         col = "Route Type"
-        df_cols.remove(col)
-        original_col = df[col]
-        predicted_col = p.getColumnsForPredictionAndPredict(df, df_cols, "Route Type", "Linear Regression")
+        display_prediction_results(df, col)
 
     if st.button("Random Forest"):
         col = "Route Type"
-        df_cols.remove(col)
-        original_col = df[col]
-        predicted_col = p.getColumnsForPredictionAndPredict(df, df_cols, "Route Type", "Random Forest")
-
-    ndf = pd.DataFrame()
-    ndf['Original'] = original_col
-    ndf['Predicted'] = predicted_col
-
-    st.dataframe(ndf)
-
+        display_prediction_results(df, col)
 else:
     st.write("Please clean your dataset.")
