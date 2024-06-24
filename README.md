@@ -12,6 +12,7 @@ Projet de data mining, qui permet d'ouvrir un CSV, de pré-traiter et nettoyer l
 
 Dataset : https://catalog.data.gov/dataset/crash-reporting-drivers-data
 
+Lien du site déployé : https://codefirst.iut.uca.fr/containers/Picksteel-pow/ (ne pas oublier le /)
 
 # Développeurs 🧑‍💻
 
