@@ -20,11 +20,6 @@ def csv_check(df):
         print("-"*12)
         print(df[col].unique())
 
-def do_for_columns(df):
-    for col_name in df:
-        df[col_name] = function(df[col_name])
-
-
 def csv_norm_min_max(df, col):
     max = df[col].max()
     min = df[col].min()
@@ -50,17 +45,13 @@ def csv_robust_normalize(df, col):
     return normalized_column
 
 def handle_normalization(df, norm_method):
-    if norm_method == "min-max":
-        for col_name in df:
+    for col_name in df:
+        if norm_method == "min-max":
             df[col_name] = csv_norm_min_max(df, col_name)
-        return df
-    elif norm_method == "z-score":
-        for col_name in df:
+        elif norm_method == "z-score":
             df[col_name] = csv_standardisation_Z(df, col_name)
-        return df
-    elif norm_method == "robust":
-        for col_name in df:
+        elif norm_method == "robust":
             df[col_name] = csv_robust_normalize(df, col_name)
-        return df
-    else:
-        raise ValueError("Unknown method")
+        else:
+            raise ValueError("Unknown method")
+    return df
