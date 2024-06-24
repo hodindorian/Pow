@@ -46,3 +46,6 @@ def csv_robust_normalize(df, column):
     df[column] = normalized_column
     print (normalized_column)
     return normalized_column
+
+
+
