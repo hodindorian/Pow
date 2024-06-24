@@ -13,7 +13,6 @@ if 'original_df' in st.session_state:
     st.write("## Missing data")
     rm_empty_rows_or_cols = st.checkbox("Remove empty rows or columns", True)
 
-
     st.write("#### Replace missing values")
     replace_methods = ["mean","median","mode","knn","regression"]
     replace_method = st.radio('Choose an option:', replace_methods)

@@ -18,7 +18,6 @@ def drop_high_null_percentage(data, threshold=0.5):
     data = data.loc[:, missing_percentage <= threshold]
     return data
 
-
 def replace_with_mean(data):
     return data.apply(lambda col: col.fillna(col.mean()) if col.dtype.kind in 'biufc' else col)
 
@@ -48,10 +47,9 @@ def impute_with_regression(data):
         model = LinearRegression()
         model.fit(X_complete, y_complete)
         y_pred = model.predict(X_missing)
-        data.loc[df[col].isnull(), col] = y_pred
+        data.loc[data[col].isnull(), col] = y_pred
         
     return data
-
 
 """    
     Parameters:
