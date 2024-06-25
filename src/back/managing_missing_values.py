@@ -6,7 +6,9 @@ import load_csv as l
 
 def convert_categorical_to_numeric(data):
     for column in data.columns:
-        if data[column].nunique() <= 15:
+        if pd.api.types.is_numeric_dtype(data[column]):
+            continue
+        elif data[column].nunique() <= 15:
             data[column] = data[column].astype('category')
             data[column] = data[column].cat.codes.replace(-1, np.nan) + 1
         else:
@@ -71,3 +73,9 @@ def handle_missing_values(data, method, n_neighbors=5):
         return impute_with_regression(data)
     else:
         raise ValueError("Unknown method")
+
+df = l.return_csv('./transfusion.data')
+
+print(df)
+
+print(handle_missing_values(df,'mean'))
