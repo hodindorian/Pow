@@ -73,9 +73,3 @@ def handle_missing_values(data, method, n_neighbors=5):
         return impute_with_regression(data)
     else:
         raise ValueError("Unknown method")
-
-df = l.return_csv('./transfusion.data')
-
-print(df)
-
-print(handle_missing_values(df,'mean'))
