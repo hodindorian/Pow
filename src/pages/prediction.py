@@ -14,13 +14,13 @@ def handle_column_multiselect(df, method_name):
     
 def df_prediction_results(df, targetCol, sourceColumns, method):
     original_col = df[targetCol]
-    predicted_col = p.getColumnsForPredictionAndPredict(df, sourceColumns, targetCol, method)    
+    predicted_col = p.getColumnsForPredictionAndPredict(df, sourceColumns, targetCol, method)
     
     new_df = pd.DataFrame()
     new_df['Original'] = original_col
     new_df['Predicted'] = predicted_col
 
-    return new_df    
+    return new_df
 
 if 'df' in st.session_state:
     df = st.session_state.df
@@ -44,9 +44,11 @@ if 'df' in st.session_state:
         for idx, tab in enumerate(cluster_tabs):
             if tab.button(f"Start {tab_names[idx]}"):
                 if tab_names[idx] == "K-means":
-                    tab.pyplot(cc.launch_cluster_knn(df, selected_columns, dimensions=dimensions))
+                    fig = cc.launch_cluster_knn(df, selected_columns, dimensions=dimensions)
                 else:
-                    tab.pyplot(cc.launch_cluster_dbscan(df, selected_columns, dimensions))
+                    fig = cc.launch_cluster_dbscan(df, selected_columns, dimensions)
+
+                tab.pyplot(fig)
 
     with tab2:
         st.header("Predictions")
@@ -66,6 +68,7 @@ if 'df' in st.session_state:
         for idx, tab in enumerate(prediction_tabs):
             if tab.button(f"Start {tab_names[idx]}"):
                 tab.pyplot(p.correlation_matrix(df, selected_columns_p+[target_column]))
-                tab.dataframe(df_prediction_results(df, target_column, selected_columns_p, tab_names[idx]))
+                tmp_df = df_prediction_results(df, target_column, selected_columns_p, tab_names[idx])
+                tab.dataframe(tmp_df)
 else:
     st.write("Please clean your dataset.")

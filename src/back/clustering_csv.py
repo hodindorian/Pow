@@ -90,7 +90,6 @@ def launch_cluster_dbscan(df, array_columns, dimensions=2):
         return visualize_clusters_3d(X, labels_dbscan, title="DBSCAN Clustering 3D")
     else:
         return visualize_clusters_2d(X, labels_dbscan, title="DBSCAN Clustering")
-    return stats_dbscan
 
 def launch_cluster(df, array_columns):
     X = df[array_columns].values
