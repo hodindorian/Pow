@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.datasets import make_blobs, make_moons
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn.decomposition import PCA
 
 def visualize_clusters_2d(X, labels, centers=None, title="Clusters"):
     plt.figure(figsize=(10, 7))
@@ -56,8 +57,11 @@ def calculate_cluster_statistics_dbscan(X, labels):
         })
     return stats
 
-def launch_cluster_knn(df, array_columns, n=3):
+def launch_cluster_knn(df, array_columns, n=3, dimensions=2):
     X = df[array_columns].values
+    if len(array_columns) > 3:
+        pca = PCA(dimensions)
+        X = pca.fit_transform(df)
     
     kmeans = KMeans(n_clusters=n, random_state=42)
     labels_kmeans = kmeans.fit_predict(X)
@@ -66,19 +70,23 @@ def launch_cluster_knn(df, array_columns, n=3):
     #     print(f"Cluster {stat['cluster']}: {stat['num_points']} points, Center: {stat['center']}")
 
     stats_kmeans = calculate_cluster_statistics_kmeans(X, labels_kmeans, centers_kmeans)
-    if len(array_columns) == 3:
+    if dimensions == 3:
         return visualize_clusters_3d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering 3D")
     else:
         return visualize_clusters_2d(X, labels_kmeans, centers_kmeans, title="K-Means Clustering")
 
-def launch_cluster_dbscan(df, array_columns):
+def launch_cluster_dbscan(df, array_columns, dimensions=2):
     X = df[array_columns].values
+    if len(array_columns) > 3:
+        pca = PCA(dimensions)
+        X = pca.fit_transform(df)
+    
     dbscan = DBSCAN(eps=0.2, min_samples=5)
     labels_dbscan = dbscan.fit_predict(X)
     stats_dbscan = calculate_cluster_statistics_dbscan(X, labels_dbscan)
     # for stat in stats_dbscan:
     #     print(f"Cluster {stat['cluster']}: {stat['num_points']} points, Density: {stat['density']}")
-    if len(array_columns) == 3:
+    if dimensions == 3:
         return visualize_clusters_3d(X, labels_dbscan, title="DBSCAN Clustering 3D")
     else:
         return visualize_clusters_2d(X, labels_dbscan, title="DBSCAN Clustering")
