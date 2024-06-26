@@ -14,6 +14,12 @@ Dataset : https://catalog.data.gov/dataset/crash-reporting-drivers-data
 
 Lien du site déployé : https://codefirst.iut.uca.fr/containers/Picksteel-pow/ (ne pas oublier le /)
 
+Pour lancer le projet en local, depuis le dossier src faite :
+'''
+streamlit run /home.py
+'''
+ATTENTION : Ne pas run le ficher home.py depuis le dossier racine du projet, mais bien une fois dans le dossier src.
+
 # Développeurs 🧑‍💻
 
 - Rémi ARNAL : remi.arnal@etu.uca.fr
